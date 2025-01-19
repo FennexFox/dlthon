@@ -1,5 +1,7 @@
 .ipynb_checkpoints/*
 wandb/*
+*/__pycache__/*
+
 *.db
 *.log
 *.wandb
