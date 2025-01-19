@@ -1,7 +1,8 @@
-jellyfish/*
 .ipynb_checkpoints/*
 wandb/*
 *.db
 *.log
 *.wandb
 *.keras
+*.zip
+aug*
