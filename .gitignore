@@ -8,3 +8,4 @@ wandb/*
 *.keras
 *.zip
 aug*
+*.Identifier
