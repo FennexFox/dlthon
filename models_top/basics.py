@@ -7,6 +7,9 @@ def simple1():
         layers.Dense(256, activation='relu'),
         layers.Dropout(0.5)
     ])
+    
+    model.name = "basic_simple1"
+    
     return model
 
 def simple2():
@@ -16,6 +19,9 @@ def simple2():
         layers.Dropout(0.5),
         layers.Dense(256, activation='relu')
     ])
+    
+    model.name = "basic_simple2"
+    
     return model
 
 def midsize1():
@@ -26,4 +32,7 @@ def midsize1():
         layers.Dropout(0.5),
         layers.Dense(256, activation='relu')
     ])
+    
+    model.name = "basic_midsize1"
+    
     return model
