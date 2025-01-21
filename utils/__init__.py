@@ -4,3 +4,4 @@ from .plot import *
 from .callbacks import *
 from .data import *
 from .preprocessing import *
+from .stats import *
