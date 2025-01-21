@@ -1,16 +1,16 @@
 import tensorflow, keras
 
-def callback_savemodel(model_name):
+def callback_savemodel(model_name, monitor='val_loss'):
     return keras.callbacks.ModelCheckpoint(
         model_name,
-        monitor='val_loss',
+        monitor=monitor,
         save_best_only=True,
         save_weights_only=False,
         verbose=0
     )
 
-def callback_earlystop(patience):
+def callback_earlystop(patience, monitor='val_loss'):
     return keras.callbacks.EarlyStopping(
-        monitor='val_loss',
+        monitor=monitor,
         patience=patience,
     )

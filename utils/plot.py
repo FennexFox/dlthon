@@ -1,6 +1,5 @@
 from matplotlib import pyplot as plt
 
-# designing utility functions
 def plot_history(history, loss_ylim=(0, 5), acc_ylim=(0, 1)):
     fig = plt.figure(figsize=(10, 5))
     
