@@ -66,12 +66,14 @@ def midsize3():
     x = layers.Dense(512, activation='relu')(x)
     x = layers.Dropout(0.5)(x)
     x = layers.add([x, residual])
+    x = layers.BatchNormalization()(x)
     
     residual = x
     x = layers.Dense(512, activation='relu')(x)
     x = layers.Dense(512, activation='relu')(x)
     x = layers.Dropout(0.5)(x)
     x = layers.add([x, residual])
+    x = layers.BatchNormalization()(x)
 
     output = layers.Dense(256, activation='relu')(x)
     

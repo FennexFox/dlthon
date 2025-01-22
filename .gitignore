@@ -10,3 +10,4 @@ wandb/*
 aug*
 
 *.Identifier
+*.pyc
