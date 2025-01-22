@@ -75,7 +75,8 @@ def midsize3():
     x = layers.Dense(512, activation='relu')(x)
     x = layers.Dropout(0.5)(x)
     x = layers.add([x, residual])
-    output = layers.Dense(256, activation='relu')(x)
+    x = layers.Dense(256, activation='relu')(x)
+    output = layers.BatchNormalization()(x)
     
     model = keras.Model(inputs=inputs, outputs=output, name="basic_midsize3")
     return model
