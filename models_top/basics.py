@@ -3,7 +3,7 @@ from keras import layers
 
 def simple1():
     model = keras.Sequential([
-        layers.Flatten(),
+        layers.GlobalAveragePooling2D(),
         layers.Dense(256, activation='relu'),
         layers.Dropout(0.5)
     ])
@@ -58,6 +58,7 @@ def midsize2():
 
 def midsize3():
     inputs = keras.Input(shape=(7, 7, 1280))
+    
     x = layers.GlobalAveragePooling2D()(inputs)
     x = layers.Dense(1024, activation='relu')(x)
 
@@ -75,7 +76,6 @@ def midsize3():
     x = layers.Dropout(0.5)(x)
     x = layers.add([x, residual])
     output = layers.Dense(256, activation='relu')(x)
-    x = layers.BatchNormalization()(x)
     
     model = keras.Model(inputs=inputs, outputs=output, name="basic_midsize3")
     return model
