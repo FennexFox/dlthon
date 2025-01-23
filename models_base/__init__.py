@@ -2,4 +2,3 @@
 
 from .efficientnet import *
 from .mobilenet import *
-from .vgg import *
