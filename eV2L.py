@@ -16,44 +16,26 @@ def load_model(model_name = 'eV2L_midsize3.keras'):
     
     return model
 
-async def predict(model, img):
+def predict(model, img):
     try:
-        # 파일 포인터 리셋
-        await img.seek(0)
+        # PIL Image 검증
+        if not isinstance(img, Image.Image):
+            raise ValueError("Input must be a PIL Image object")
         
-        # 이미지 읽기 및 검증
-        contents = await img.read()
-        if not contents:
-            raise ValueError("Empty image file")
-        
-        # 디버깅을 위한 파일 크기 출력
-        print(f"File size: {len(contents)} bytes")
-            
-        image_bytes = io.BytesIO(contents)
-        image_bytes.seek(0)  # 파일 포인터 리셋
-        
-        # 이미지 형식 검증 후 열기
-        try:
-            pil_image = Image.open(image_bytes)
-            pil_image.verify()  # 이미지 파일 검증
-            image_bytes.seek(0)  # 검증 후 포인터 리셋
-            pil_image = Image.open(image_bytes)  # 다시 열기
-        except Exception as e:
-            raise ValueError(f"Invalid image format: {e}")
-        
-        # PIL Image로 로드 및 크기 조정
-        pil_image = pil_image.resize((224, 224))
+        # 이미지 크기 조정
+        img = img.resize((224, 224))
         
         # numpy 배열로 변환 및 전처리
-        img_array = keras.utils.img_to_array(pil_image)
+        img_array = keras.utils.img_to_array(img)
         img_array = tf.expand_dims(img_array, 0)  # 배치 차원 추가
         
         predictions = model.predict(img_array)
         score = tf.nn.softmax(predictions[0])
 
         return {
-            "class": class_names[np.argmax(score)-1],
-            "score": float(100 * np.max(score))  # numpy float을 Python float으로 변환
+            "species": class_names[np.argmax(score)-1],
+            "description": "it's not a description",
+            "confidence": float(np.max(score))
         }
     except Exception as e:
-        raise Exception(f"failed to predict: {e}")
+        raise Exception(f"Prediction failed: {str(e)}")
