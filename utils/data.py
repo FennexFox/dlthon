@@ -2,10 +2,10 @@ import pathlib, keras
 
 # loading the dataset
 def load_split_datasets(base_dir, image_size = (224, 224), batch_size = 64):
-    if not pathlib.Path(base_dir).exists():
-        raise ValueError(f"Directory {base_dir} does not exist")
+    if not pathlib.Path(f"data/{base_dir}").exists():
+        raise ValueError(f"Directory data/{base_dir} does not exist")
 
-    base_dir = pathlib.Path(f'{base_dir}/Train_Test_Valid')
+    base_dir = pathlib.Path(f'data/{base_dir}/Train_Test_Valid')
 
     train_dataset = keras.utils.image_dataset_from_directory(
         base_dir / "train",
@@ -28,11 +28,11 @@ def load_split_datasets(base_dir, image_size = (224, 224), batch_size = 64):
     return train_dataset, val_dataset, test_dataset
 
 def load_unified_datasets(base_dir, image_size = (224, 224), batch_size = 64, val_split = 0.4):
-    if not pathlib.Path(base_dir).exists():
-        raise ValueError(f"Directory {base_dir} does not exist")
+    if not pathlib.Path(f"data/{base_dir}").exists():
+        raise ValueError(f"Directory data/{base_dir} does not exist")
         
     dataset = keras.utils.image_dataset_from_directory(
-        pathlib.Path(base_dir),
+        pathlib.Path(f"data/{base_dir}"),
         validation_split=val_split,
         subset="both",
         seed=123,
